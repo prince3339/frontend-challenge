@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import Wallet from 'components/wallet/Wallet';
 
-const Wallet: NextPage = () => {
+const WalletPage: NextPage = () => {
   return (
     <div>
       <Head>
@@ -11,10 +12,10 @@ const Wallet: NextPage = () => {
       </Head>
 
       <main>
-        Wallet
+        <Wallet />
       </main>
     </div>
   )
 }
 
-export default Wallet;
+export default WalletPage;

@@ -1,16 +1,11 @@
-import { useEffect } from "react";
 import useSWR from "swr";
 
 // types
 import type { Crypto } from "types/crypto";
 
-interface Props {
-	cryptos: Crypto[]
-}
-  
 const Home = () => {
 	const { data, error } = useSWR(
-    "https://api.energiswap.exchange/v1/assets"
+    "https://api.energiswap.exchange/v1/assets" // Should be passed from environment variable in real app
   );
 
 	// Map data to format and then sort by price
@@ -24,7 +19,6 @@ const Home = () => {
 		return b.price - a.price
 	});
 
-	console.log(data);
 	if (!data) {
 		return(<p className="text-center p-10 text-xl">Loading...</p>)
 	}
@@ -57,7 +51,20 @@ const Home = () => {
 											<td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium dark:text-gray-300 text-gray-900 sm:pl-6">
 												{index + 1}
 											</td>
-											<td className="whitespace-nowrap px-3 py-4 text-sm dark:text-gray-300 text-gray-500">{crypto.name}</td>
+											<td className="whitespace-nowrap px-3 py-4 text-sm dark:text-gray-300 text-gray-500">
+												<div className="flex gap-2">
+													<img
+														className="w-5"
+														src={`/assets/icons/${crypto.symbol}.svg`}
+														alt={crypto.name}
+														onError={(e)=>{
+															// @ts-ignore
+															e.target.onerror = null; e.target.src="https://via.placeholder.com/350x150"
+														}}
+													/>
+													{crypto.name}
+												</div>
+											</td>
 											<td className="whitespace-nowrap px-3 py-4 text-sm dark:text-gray-300 text-gray-500">{crypto.symbol}</td>
 											<td className="whitespace-nowrap px-3 py-4 text-sm dark:text-gray-300 text-gray-500">${crypto.price.toFixed(2).toLocaleString()}</td>
 										</tr>
