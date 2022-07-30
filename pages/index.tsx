@@ -1,7 +1,10 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import Head from 'next/head';
 
-const Home: NextPage = () => {
+// components
+import HomePage from 'components/home/Home';
+
+const Home: NextPage = ({ }) => {
   return (
     <div>
       <Head>
@@ -11,7 +14,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-       
+        <HomePage />
       </main>
     </div>
   )

@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
+import { SWRConfig } from 'swr'; 
 
 // components
 import { AppLayout } from 'components';
@@ -10,9 +11,16 @@ import ContextProvider from 'context/AppContext';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ContextProvider>
-      <AppLayout>
-        <Component {...pageProps} />
-      </AppLayout>
+      <SWRConfig 
+        value={{
+          revalidateOnFocus: true,
+          fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
+        }}
+      >
+        <AppLayout>
+          <Component {...pageProps} />
+        </AppLayout>
+      </SWRConfig>
     </ContextProvider>
   )
 }
