@@ -4,3 +4,8 @@ export interface Crypto {
 	symbol: string;
 	price: number;
 }
+
+export interface Balance {
+	crypto: number;
+	usd?: number;
+}
